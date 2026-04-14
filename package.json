@@ -1,7 +1,7 @@
 {
-	"name": "claudekit-cli",
+	"name": "crack-kit-cli",
 	"version": "3.41.4",
-	"description": "CLI tool for bootstrapping and updating ClaudeKit projects",
+	"description": "CLI tool for bootstrapping and updating Crack Kit projects",
 	"type": "module",
 	"repository": {
 		"type": "git",
