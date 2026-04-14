@@ -174,8 +174,14 @@ export class FileDownloader {
 		// Add authentication for GitHub API URLs
 		if (token && url.includes("api.github.com")) {
 			headers.Authorization = `Bearer ${token}`;
-			// Use application/octet-stream for asset downloads (not vnd.github+json)
-			headers.Accept = "application/octet-stream";
+			// GitHub API endpoints require different Accept headers:
+			// - Asset downloads (/repos/.../releases/assets/...): application/octet-stream
+			// - Tarball/zipball (/repos/.../tarball/... or /repos/.../zipball/...): application/vnd.github+json
+			if (url.includes("/releases/assets/")) {
+				headers.Accept = "application/octet-stream";
+			} else {
+				headers.Accept = "application/vnd.github+json";
+			}
 			headers["X-GitHub-Api-Version"] = "2022-11-28";
 		} else {
 			headers.Accept = "application/octet-stream";
